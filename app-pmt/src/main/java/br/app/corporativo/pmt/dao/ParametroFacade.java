@@ -1,11 +1,9 @@
 package br.app.corporativo.pmt.dao;
 
-import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -40,16 +38,5 @@ public class ParametroFacade extends AbstractFacade<Parametro> {
 		return em.createQuery(criteria).getSingleResult();
 	}
 
-	public List<Parametro> buscarTodos() {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Parametro> criteria = cb.createQuery(Parametro.class);
-		Root<Parametro> parametro = criteria.from(Parametro.class);
-		CriteriaQuery<Parametro> todos = criteria.select(parametro);
-		TypedQuery<Parametro> allQuery = em.createQuery(todos);
-		
-		List<Parametro> resultado = allQuery.getResultList();
-		
-		System.out.println("Quantidade todos? " + resultado.size());
-		return resultado;
-	}
+
 }

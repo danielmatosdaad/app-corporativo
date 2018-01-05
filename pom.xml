@@ -8,7 +8,9 @@
 	by applicable law or agreed to in writing, software distributed under the 
 	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
 	OF ANY KIND, either express or implied. See the License for the specific 
-	language governing permissions and limitations under the License. --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	language governing permissions and limitations under the License. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.com.app.smart.business</groupId>
@@ -27,74 +29,76 @@
 		</license>
 	</licenses>
 
-	<properties>
-		<!-- Explicitly declaring the source encoding eliminates the following 
-			message: -->
-		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
-			resources, i.e. build is platform dependent! -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	 <properties>
+        <!-- Explicitly declaring the source encoding eliminates the following 
+            message: -->
+        <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
+            resources, i.e. build is platform dependent! -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<!-- JBoss dependency versions -->
+        <!-- JBoss dependency versions -->
+        
+        <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
 
-		<version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
+        <!-- Define the version of the JBoss BOMs we want to import to specify tested stacks. -->
+        <version.jboss.bom>8.2.1.Final</version.jboss.bom>
+        <version.wildfly>9.0.0.Alpha1</version.wildfly>
 
-		<!-- Define the version of the JBoss BOMs we want to import to specify 
-			tested stacks. -->
-		<version.jboss.bom.eap>6.4.0.GA</version.jboss.bom.eap>
 
-		<version.jboss.as>7.5.0.Final-redhat-21</version.jboss.as>
+        <!-- other plugin versions -->
+        <version.compiler.plugin>3.1</version.compiler.plugin>
+        <version.ear.plugin>2.10</version.ear.plugin>
+        <version.ejb.plugin>2.3</version.ejb.plugin>
+        <version.surefire.plugin>2.16</version.surefire.plugin>
+        <version.war.plugin>2.5</version.war.plugin>
 
-		<!-- other plugin versions -->
-		<version.ear.plugin>2.8</version.ear.plugin>
-		<version.ejb.plugin>2.3</version.ejb.plugin>
-		<version.surefire.plugin>2.10</version.surefire.plugin>
-		<version.war.plugin>2.1.1</version.war.plugin>
+        <!-- maven-compiler-plugin -->
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
+    </properties>
 
-		<!-- maven-compiler-plugin -->
-		<maven.compiler.target>1.7</maven.compiler.target>
-		<maven.compiler.source>1.7</maven.compiler.source>
-	</properties>
 
 	<modules>
-        <module>app-corporativo-api</module>
+		<module>app-corporativo-api</module>
 		<module>app-corporativo-ear</module>
 		<module>app-corporativo-integracao</module>
 		<module>app-cta</module>
-		<module>app-infra-persistencia</module>
-		<module>app-infra-servico</module>
 		<module>app-pmt</module>
 		<module>app-usr</module>
-  </modules>
+	</modules>
 
 	<dependencyManagement>
-		<dependencies>
+	  <dependencies>
 
-			<!-- Define the version of the EJB jar so that we don't need to repeat 
-				ourselves in every module -->
+            <!-- Define the version of the EJB jar so that we don't need 
+                to repeat ourselves in every module -->
+            
+            <!-- Define the version of the WAR so that we don't need to repeat 
+                ourselves in every module -->
 
-			<!-- JBoss distributes a complete set of Java EE 6 APIs including a Bill 
-				of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection) 
-				of artifacts. We use this here so that we always get the correct versions 
-				of artifacts. Here we use the jboss-javaee-6.0-with-tools stack (you can 
-				read this as the JBoss stack of the Java EE 6 APIs, with some extras tools 
-				for your project, such as Arquillian for testing) and the jboss-javaee-6.0-with-hibernate 
-				stack you can read this as the JBoss stack of the Java EE 6 APIs, with extras 
-				from the Hibernate family of projects) -->
-			<dependency>
-				<groupId>org.jboss.bom.eap</groupId>
-				<artifactId>jboss-javaee-6.0-with-tools</artifactId>
-				<version>${version.jboss.bom.eap}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
+            <!-- JBoss distributes a complete set of Java EE 7 APIs including
+                a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or 
+                a collection) of artifacts. We use this here so that we always get the correct 
+                versions of artifacts. Here we use the jboss-javaee-7.0-with-tools stack
+                (you can read this as the JBoss stack of the Java EE 7 APIs, with some extras
+                tools for your project, such as Arquillian for testing) and the jboss-javaee-7.0-with-hibernate
+                stack you can read this as the JBoss stack of the Java EE 7 APIs, with extras
+                from the Hibernate family of projects) -->
+            <dependency>
+                <groupId>org.wildfly.bom</groupId>
+                <artifactId>jboss-javaee-7.0-with-tools</artifactId>
+                <version>${version.jboss.bom}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-			<dependency>
-				<groupId>org.jboss.bom.eap</groupId>
-				<artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
-				<version>${version.jboss.bom.eap}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
+            <dependency>
+                <groupId>org.wildfly.bom</groupId>
+                <artifactId>jboss-javaee-7.0-with-hibernate</artifactId>
+                <version>${version.jboss.bom}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
 			<dependency>
 				<groupId>br.com.app.smart.business</groupId>
@@ -107,68 +111,22 @@
 	<build>
 		<pluginManagement>
 			<plugins>
-				<!-- The JBoss AS plugin deploys your ear to a local JBoss EAP container -->
+				<!-- The WildFly plugin deploys your ear to a local JBoss AS container -->
 				<!-- Due to Maven's lack of intelligence with EARs we need to configure 
-					the jboss-as maven plugin to skip deployment for all modules. We then enable 
+					the wildfly maven plugin to skip deployment for all modules. We then enable 
 					it specifically in the ear module. -->
 				<plugin>
-					<groupId>org.jboss.as.plugins</groupId>
-					<artifactId>jboss-as-maven-plugin</artifactId>
-					<version>${version.jboss.maven.plugin}</version>
+					<groupId>org.wildfly.plugins</groupId>
+					<artifactId>wildfly-maven-plugin</artifactId>
+					<version>${version.wildfly.maven.plugin}</version>
 					<inherited>true</inherited>
 					<configuration>
 						<skip>true</skip>
 					</configuration>
 				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-pmd-plugin</artifactId>
-					<version>3.6</version>
-					<executions>
-						<execution>
-							<phase>verify</phase>
-							<goals>
-								<goal>check</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<profiles>
-		<!-- Activate JBoss Product Maven repository -->
-		<profile>
-			<id>jboss-product-repository</id>
-			<activation>
-				<property>
-					<name>!jboss-product-repository</name>
-				</property>
-			</activation>
-			<repositories>
-				<repository>
-					<id>redhat-techpreview-all-repository</id>
-					<url>http://maven.repository.redhat.com/techpreview/all/</url>
-				</repository>
-			</repositories>
-		</profile>
-	</profiles>
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.19.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.6</version>
-			</plugin>
-		</plugins>
-	</reporting>
-
 	<dependencies>
 		<dependency>
 			<groupId>br.com.app.smart.business</groupId>

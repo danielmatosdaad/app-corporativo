@@ -32,19 +32,6 @@ public class ContaFacade extends AbstractFacade<Conta> {
 		return em;
 	}
 
-
-	public List<Conta> buscarTodos() {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Conta> criteria = cb.createQuery(Conta.class);
-		Root<Conta> parametro = criteria.from(Conta.class);
-		CriteriaQuery<Conta> todos = criteria.select(parametro);
-		TypedQuery<Conta> allQuery = em.createQuery(todos);
-		
-		List<Conta> resultado = allQuery.getResultList();
-		
-		System.out.println("Quantidade todos? " + resultado.size());
-		return resultado;
-	}
 	
 	
 }

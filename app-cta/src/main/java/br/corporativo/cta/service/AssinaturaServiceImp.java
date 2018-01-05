@@ -20,8 +20,8 @@ import br.corporativo.cta.dao.AssinaturaFacade;
 import br.corporativo.cta.model.Assinatura;
 
 @Stateless
-@Remote(value = { IServicoAssinaturaRemote.class,IServicoRemoteDAO.class })
-@Local(value = { IServicoAssinaturaLocal.class,IServicoLocalDAO.class })
+@Remote(value = { IServicoAssinaturaRemote.class, IServicoRemoteDAO.class })
+@Local(value = { IServicoAssinaturaLocal.class, IServicoLocalDAO.class })
 public class AssinaturaServiceImp implements IServicoAssinaturaRemote, IServicoAssinaturaLocal {
 
 	/**
@@ -41,7 +41,7 @@ public class AssinaturaServiceImp implements IServicoAssinaturaRemote, IServicoA
 			return ServiceDAO.adiconar(this.assinaturaFacade, Assinatura.class, dto);
 
 		} catch (Exception e) {
-			
+
 			throw new InfraEstruturaException(e);
 
 		}
@@ -50,11 +50,11 @@ public class AssinaturaServiceImp implements IServicoAssinaturaRemote, IServicoA
 	@Override
 	public List<AssinaturaDTO> adiconar(List<AssinaturaDTO> listaDto) throws InfraEstruturaException, NegocioException {
 		try {
-			
+
 			return ServiceDAO.adiconar(this.assinaturaFacade, Assinatura.class, listaDto);
 
 		} catch (Exception e) {
-			
+
 			throw new InfraEstruturaException(e);
 
 		}
@@ -63,11 +63,11 @@ public class AssinaturaServiceImp implements IServicoAssinaturaRemote, IServicoA
 	@Override
 	public AssinaturaDTO alterar(AssinaturaDTO dto) throws InfraEstruturaException, NegocioException {
 		try {
-			
+
 			return ServiceDAO.alterar(this.assinaturaFacade, Assinatura.class, dto);
 
 		} catch (Exception e) {
-			
+
 			throw new InfraEstruturaException(e);
 
 		}
@@ -76,11 +76,11 @@ public class AssinaturaServiceImp implements IServicoAssinaturaRemote, IServicoA
 	@Override
 	public void remover(AssinaturaDTO dto) throws InfraEstruturaException, NegocioException {
 		try {
-			
+
 			ServiceDAO.remover(this.assinaturaFacade, Assinatura.class, dto);
 
 		} catch (Exception e) {
-			
+
 			throw new InfraEstruturaException(e);
 
 		}
@@ -88,19 +88,13 @@ public class AssinaturaServiceImp implements IServicoAssinaturaRemote, IServicoA
 	}
 
 	@Override
-	public void removerPorId(Long id) throws InfraEstruturaException, NegocioException {
-	
-
-	}
-
-	@Override
 	public List<AssinaturaDTO> bustarTodos() throws InfraEstruturaException, NegocioException {
 		try {
-			
+
 			return ServiceDAO.bustarTodos(this.assinaturaFacade, AssinaturaDTO.class);
 
 		} catch (Exception e) {
-			
+
 			throw new InfraEstruturaException(e);
 
 		}
@@ -109,11 +103,11 @@ public class AssinaturaServiceImp implements IServicoAssinaturaRemote, IServicoA
 	@Override
 	public AssinaturaDTO bustarPorID(Long id) throws InfraEstruturaException, NegocioException {
 		try {
-			
-			return ServiceDAO.bustarPorID(this.assinaturaFacade, AssinaturaDTO.class,id);
+
+			return ServiceDAO.bustarPorID(this.assinaturaFacade, AssinaturaDTO.class, id);
 
 		} catch (Exception e) {
-			
+
 			throw new InfraEstruturaException(e);
 
 		}
@@ -122,15 +116,20 @@ public class AssinaturaServiceImp implements IServicoAssinaturaRemote, IServicoA
 	@Override
 	public List<AssinaturaDTO> bustarPorIntervaloID(int[] range) throws InfraEstruturaException, NegocioException {
 		try {
-			
-			return ServiceDAO.bustarPorIntervaloID(this.assinaturaFacade, AssinaturaDTO.class,range);
+
+			return ServiceDAO.bustarPorIntervaloID(this.assinaturaFacade, AssinaturaDTO.class, range);
 
 		} catch (Exception e) {
-			
+
 			throw new InfraEstruturaException(e);
 
 		}
 	}
 
+	@Override
+	public void removerPorId(Long id) throws InfraEstruturaException, NegocioException {
+		ServiceDAO.removerPorId(this.assinaturaFacade, id);
+
+	}
 
 }

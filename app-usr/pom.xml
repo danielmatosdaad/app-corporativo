@@ -32,8 +32,35 @@
 		</license>
 	</licenses>
 	<properties>
-		<version.arquillian_core>1.1.0.Final</version.arquillian_core>
-	</properties>
+     
+     <version.arquillian_core>1.1.0.Final</version.arquillian_core>
+        <!-- Explicitly declaring the source encoding eliminates the following 
+            message: -->
+        <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
+            resources, i.e. build is platform dependent! -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- JBoss dependency versions -->
+        
+        <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+
+        <!-- Define the version of the JBoss BOMs we want to import to specify tested stacks. -->
+        <version.jboss.bom>8.2.1.Final</version.jboss.bom>
+        <version.wildfly>9.0.0.Alpha1</version.wildfly>
+
+
+        <!-- other plugin versions -->
+        <version.compiler.plugin>3.1</version.compiler.plugin>
+        <version.ear.plugin>2.10</version.ear.plugin>
+        <version.ejb.plugin>2.3</version.ejb.plugin>
+        <version.surefire.plugin>2.16</version.surefire.plugin>
+        <version.war.plugin>2.5</version.war.plugin>
+
+        <!-- maven-compiler-plugin -->
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
+    </properties>
+	
 
 	<dependencyManagement>
 		<dependencies>
@@ -57,18 +84,18 @@
 	<dependencies>
 
 		<!-- Declare the APIs we depend on and need for compilation. All of them 
-			are provided by JBoss EAP 6 -->
+			are provided by JBoss WildFly -->
 
 		<!-- Import the EJB API, we use provided scope as the API is included in 
-			JBoss EAP 6 -->
+			JBoss WildFly -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.ejb</groupId>
-			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
+			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
 		<!-- Import the CDI API, we use provided scope as the API is included in 
-			JBoss EAP 6 -->
+			JBoss WildFly -->
 		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
@@ -76,16 +103,16 @@
 		</dependency>
 
 		<!-- Import the JPA API, we use provided scope as the API is included in 
-			JBoss EAP 6 -->
+			JBoss WildFly -->
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
 		<!-- JSR-303 (Bean Validation) Implementation -->
 		<!-- Provides portable constraints such as @Email -->
-		<!-- Hibernate Validator is shipped in JBoss EAP 6 -->
+		<!-- Hibernate Validator is shipped in JBoss WildFly -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>

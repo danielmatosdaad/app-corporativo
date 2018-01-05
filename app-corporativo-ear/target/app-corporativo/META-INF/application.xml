@@ -2,25 +2,19 @@
 <application xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_6.xsd" version="6">
   <display-name>app-corporativo-ear</display-name>
   <module>
-    <ejb>app-fnc-mdo.jar</ejb>
+    <ejb>app-corporativo-cta.jar</ejb>
   </module>
   <module>
-    <ejb>app-cta.jar</ejb>
+    <ejb>app-corporativo-pmt.jar</ejb>
   </module>
   <module>
-    <ejb>app-pmt.jar</ejb>
+    <ejb>app-corporativo-usr.jar</ejb>
   </module>
   <module>
-    <ejb>app-usr.jar</ejb>
+    <ejb>app-corporativo-infra-provedor.jar</ejb>
   </module>
   <module>
-    <ejb>app-infra-servico.jar</ejb>
-  </module>
-  <module>
-    <ejb>app-tela-metadado-xml.jar</ejb>
-  </module>
-  <module>
-    <ejb>app-infra-persistencia.jar</ejb>
+    <ejb>app-barramento-infra-persistencia.jar</ejb>
   </module>
   <library-directory>lib</library-directory>
 </application>

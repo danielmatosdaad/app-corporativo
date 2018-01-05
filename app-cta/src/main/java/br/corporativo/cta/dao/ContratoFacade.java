@@ -31,17 +31,5 @@ public class ContratoFacade extends AbstractFacade<Contrato> {
 		return em;
 	}
 	
-	public List<Contrato> buscarTodos() {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Contrato> criteria = cb.createQuery(Contrato.class);
-		Root<Contrato> parametro = criteria.from(Contrato.class);
-		CriteriaQuery<Contrato> todos = criteria.select(parametro);
-		TypedQuery<Contrato> allQuery = em.createQuery(todos);
-		
-		List<Contrato> resultado = allQuery.getResultList();
-		
-		System.out.println("Quantidade Contratatos: " + resultado.size());
-		return resultado;
-	}
 
 }
